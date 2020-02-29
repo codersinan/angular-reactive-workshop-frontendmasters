@@ -16,7 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/material": ["libs/material/src/index.ts"]
+      "@app/material": ["libs/material/src/index.ts"],
+      "@app/core-data": ["libs/core-data/src/index.ts"],
+      "@app/ui-login": ["libs/ui-login/src/index.ts"],
+      "@app/ui-toolbar": ["libs/ui-toolbar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
