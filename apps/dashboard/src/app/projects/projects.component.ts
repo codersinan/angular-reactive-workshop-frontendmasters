@@ -7,7 +7,7 @@ import { ProjectsService, Project } from "@app/core-data";
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
-  projects: Project[] = [];
+  projects$: Observable<Project[]>;
   selectedProject: Project;
   constructor(private projectsService: ProjectsService) { }
 
@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.projects = this.projectsService.all()
+    this.projects$ = this.projectsService.all()
   }
   selectProject(item) {
     this.selectedProject = item;

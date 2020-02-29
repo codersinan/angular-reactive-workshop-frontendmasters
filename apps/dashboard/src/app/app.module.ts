@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from "@app/material";
 
 import { UiLoginModule } from "@app/ui-login";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
 
     MaterialModule,
 
