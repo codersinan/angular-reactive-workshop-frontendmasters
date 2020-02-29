@@ -1,5 +1,5 @@
 {
-  "npmScope": "angular-reactive-workshop",
+  "npmScope": "app",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -12,6 +12,9 @@
       "tags": []
     },
     "dashboard": {
+      "tags": []
+    },
+    "material": {
       "tags": []
     }
   }

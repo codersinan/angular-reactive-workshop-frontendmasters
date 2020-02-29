@@ -10,7 +10,7 @@
       },
       "root": "apps/dashboard",
       "sourceRoot": "apps/dashboard/src",
-      "prefix": "angular-reactive-workshop",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -87,10 +87,7 @@
               "apps/dashboard/tsconfig.app.json",
               "apps/dashboard/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/dashboard/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/dashboard/**"]
           }
         },
         "test": {
@@ -130,14 +127,40 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/dashboard-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/dashboard-e2e/**"
-            ]
+            "tsConfig": ["apps/dashboard-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/dashboard-e2e/**"]
           }
+        }
+      }
+    },
+    "material": {
+      "projectType": "library",
+      "root": "libs/material",
+      "sourceRoot": "libs/material/src",
+      "prefix": "angular-reactive-workshop",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/material/tsconfig.lib.json",
+              "libs/material/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/material/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/material/src/test.ts",
+            "tsConfig": "libs/material/tsconfig.spec.json",
+            "karmaConfig": "libs/material/karma.conf.js"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }
@@ -152,6 +175,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "karma"
+    },
+    "@nrwl/schematics:component": {
+      "styleext": "scss"
     }
   },
   "defaultProject": "dashboard"
