@@ -9,6 +9,7 @@ import { MaterialModule } from "@app/material";
 
 import { UiLoginModule } from "@app/ui-login";
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
 
     MaterialModule,
 

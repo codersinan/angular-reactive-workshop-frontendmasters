@@ -11,7 +11,24 @@ export class ProjectsService {
   model = 'projects'
   constructor(private httpClient: HttpClient) { }
 
+  getUrl() {
+    return `${BASE_URL}${this.model}`;
+  }
+  getUrlForId(id) {
+    return `${this.getUrl()}/${id}`;
+  }
+
   all(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(`${BASE_URL}${this.model}`);
+    return this.httpClient.get<Project[]>(this.getUrl());
+  }
+
+  create(project: Project) {
+    return this.httpClient.post(this.getUrl(), project);
+  }
+  update(project: Project) {
+    return this.httpClient.patch(this.getUrlForId(project.id), project);
+  }
+  delete(id) {
+    return this.httpClient.delete(this.getUrlForId(id));
   }
 }

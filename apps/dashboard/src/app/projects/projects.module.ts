@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { MaterialModule } from "@app/material";
 import { ProjectsComponent } from './projects.component';
+import { FormsModule } from '@angular/forms';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 
 @NgModule({
@@ -11,9 +14,12 @@ import { ProjectsComponent } from './projects.component';
     CommonModule,
     ProjectsRoutingModule,
     MaterialModule,
+    FormsModule
   ],
   declarations: [
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectsListComponent,
+    ProjectDetailsComponent
   ],
   exports: [
     ProjectsComponent
