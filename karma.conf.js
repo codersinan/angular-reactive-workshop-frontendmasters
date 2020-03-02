@@ -29,6 +29,8 @@ module.exports = () => {
     logLevel: constants.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: true
+    captureTimeout: 6000,    
+    singleRun: false,
+    
   };
 };
