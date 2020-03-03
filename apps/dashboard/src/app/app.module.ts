@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from "@app/material";
-
-import { UiLoginModule } from "@app/ui-login";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { MaterialModule } from "@app/material";
+
+import { UiLoginModule } from "@app/ui-login";
+import { UiToolbarModule } from "@app/ui-toolbar";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -22,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
 
     UiLoginModule,
-
+    UiToolbarModule,
     AppRoutingModule
   ],
   providers: [],

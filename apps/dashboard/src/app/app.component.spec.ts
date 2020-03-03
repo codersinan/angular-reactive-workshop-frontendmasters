@@ -1,5 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { AppComponent } from "./AppComponent";
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '@app/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsService, Project } from "@app/core-data";
+import { ProjectsService, Project, NotificationService } from "@app/core-data";
 
 import { Observable } from "rxjs";
 @Component({
@@ -10,7 +10,10 @@ import { Observable } from "rxjs";
 export class ProjectsComponent implements OnInit {
   projects$: Observable<Project[]>;
   selectedProject: Project;
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private ns: NotificationService,
+    private projectsService: ProjectsService,
+  ) { }
 
   ngOnInit() {
     this.getProjects();
@@ -42,8 +45,8 @@ export class ProjectsComponent implements OnInit {
 
   deleteProject(project) {
     this.projectsService.delete(project.id).subscribe(result => {
+      this.ns.emit('Project Deleted');
       this.getProjects();
-
     });
   }
   saveProject(project) {
@@ -56,6 +59,7 @@ export class ProjectsComponent implements OnInit {
 
   createProject(project) {
     this.projectsService.create(project).subscribe(result => {
+      this.ns.emit('Project Created');
       this.getProjects();
       this.resetProject();
     })
@@ -63,6 +67,7 @@ export class ProjectsComponent implements OnInit {
 
   updateProject(project) {
     this.projectsService.update(project).subscribe(result => {
+      this.ns.emit('Project Updated');
       this.getProjects();
       this.resetProject();
     })

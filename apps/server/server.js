@@ -1,11 +1,13 @@
 const fs = require('fs')
+const path = require('path')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 const middlewares = jsonServer.defaults()
 
 const server = jsonServer.create()
-const router = jsonServer.router('./server/db.json')
-const userdb = JSON.parse(fs.readFileSync('./server/users.json', 'UTF-8'))
+
+const router = jsonServer.router(path.join(__dirname, 'db.json'))
+const userdb = JSON.parse(fs.readFileSync(path.join(__dirname, 'users.json'), 'UTF-8'))
 
 server.use(middlewares);
 
@@ -31,15 +33,15 @@ function isAuthenticated({ email, password }) {
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
 server.post('/auth/login', (req, res) => {
-  const {email, password} = req.body
-  if (!isAuthenticated({email, password})) {
+  const { email, password } = req.body
+  if (!isAuthenticated({ email, password })) {
     const status = 401
     const message = 'Incorrect email or password'
-    res.status(status).json({status, message})
+    res.status(status).json({ status, message })
     return
   }
-  const access_token = createToken({email, password})
-  res.status(200).json({access_token})
+  const access_token = createToken({ email, password })
+  res.status(200).json({ access_token })
 })
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {

@@ -9,7 +9,7 @@
       </h1>
     </mat-card-title>
   </mat-card-header>
-  <form (submit)="saved.emit()">
+  <form (submit)="saved.emit(currentProject)">
     <mat-card-content>
       <mat-form-field>
         <input

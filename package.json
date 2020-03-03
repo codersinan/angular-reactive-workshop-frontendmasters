@@ -8,7 +8,7 @@
     "start": "concurrently \"npm run server\" \"ng serve\"",
     "server:all": "concurrently \"npm run server\" \"ng serve\" \"npm run server:auth\"",
     "server": "json-server apps/server/db.json --watch",
-    "server:auth": "node server/server.js",
+    "server:auth": "node apps/server/server.js --watch",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
