@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsService, Project, NotificationService, ProjectsState } from "@app/core-data";
+import {
+  ProjectsService, Project,
+  NotificationService,
+  ProjectsState, LoadProjects, AddProject, UpdateProject, DeleteProject, initialProjects,
+} from "@app/core-data";
 
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
@@ -21,9 +25,8 @@ export class ProjectsComponent implements OnInit {
   ) {
     this.projects$ = store.pipe(
       select('projects'),
-      map((state: any) => {
-        return state.projects;
-      })
+      map((data: any) => data.entities),
+      map((data: any) => Object.keys(data).map(k => data[k]))
     )
   }
 
@@ -52,7 +55,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    // this.projects$ = this.projectsService.all()
+    this.store.dispatch(new LoadProjects(initialProjects));
   }
 
 
@@ -65,7 +68,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.store.dispatch({ type: 'create', payload: project });
+    this.store.dispatch(new AddProject(project));
 
     // this will go away
     this.ns.emit('Project Created');
@@ -73,7 +76,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.store.dispatch({ type: 'update', payload: project });
+    this.store.dispatch(new UpdateProject(project));
 
     // this will go away
     this.ns.emit('Project Updated');
@@ -81,7 +84,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project) {
-    this.store.dispatch({ type: 'delete', payload: project });
+    this.store.dispatch(new DeleteProject(project));
 
     // this will go away
     this.ns.emit('Project Deleted');

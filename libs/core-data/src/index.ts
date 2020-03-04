@@ -10,4 +10,5 @@ export { TokenInterceptor } from "./lib/auth/token-interceptor";
 export { NotificationService } from './lib/notification/notification.service';
 
 // Expose project state
-export { ProjectsState } from './lib/state/projects/projects.reducer';
+export { ProjectsState, initialProjects } from './lib/state/projects/projects.reducer';
+export { LoadProjects, SelectProject, AddProject, UpdateProject, DeleteProject } from './lib/state/projects/projects.actions'

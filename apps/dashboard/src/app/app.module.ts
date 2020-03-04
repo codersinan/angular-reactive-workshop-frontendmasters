@@ -30,8 +30,6 @@ import { CoreDataModule } from '@app/core-data';
     UiLoginModule,
     UiToolbarModule,
 
-    
-
     AppRoutingModule,    
   ],
   providers: [],
