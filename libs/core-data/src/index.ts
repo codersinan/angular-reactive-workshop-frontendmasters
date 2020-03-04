@@ -12,3 +12,4 @@ export { NotificationService } from './lib/notification/notification.service';
 // Expose project state
 export { ProjectsState, initialProjects } from './lib/state/projects/projects.reducer';
 export { LoadProjects, SelectProject, AddProject, UpdateProject, DeleteProject } from './lib/state/projects/projects.actions'
+export { selectAllProjects } from './lib/state'

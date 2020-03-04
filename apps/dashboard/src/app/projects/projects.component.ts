@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {
   ProjectsService, Project,
   NotificationService,
-  ProjectsState, LoadProjects, AddProject, UpdateProject, DeleteProject, initialProjects,
+  ProjectsState,
+  LoadProjects, AddProject, UpdateProject, DeleteProject,
+  initialProjects, selectAllProjects,
 } from "@app/core-data";
 
 import { Observable } from "rxjs";
@@ -24,9 +26,7 @@ export class ProjectsComponent implements OnInit {
     private store: Store<ProjectsState>,
   ) {
     this.projects$ = store.pipe(
-      select('projects'),
-      map((data: any) => data.entities),
-      map((data: any) => Object.keys(data).map(k => data[k]))
+      select(selectAllProjects)
     )
   }
 
@@ -55,7 +55,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.store.dispatch(new LoadProjects(initialProjects));
+    this.store.dispatch(LoadProjects());
   }
 
 
@@ -68,7 +68,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.store.dispatch(new AddProject(project));
+    this.store.dispatch(AddProject({ project }));
 
     // this will go away
     this.ns.emit('Project Created');
@@ -76,15 +76,15 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.store.dispatch(new UpdateProject(project));
+    this.store.dispatch(UpdateProject({ project }));
 
     // this will go away
     this.ns.emit('Project Updated');
     this.resetProject();
   }
 
-  deleteProject(project) {
-    this.store.dispatch(new DeleteProject(project));
+  deleteProject(project: Project) {
+    this.store.dispatch(DeleteProject({ id: project.id }));
 
     // this will go away
     this.ns.emit('Project Deleted');

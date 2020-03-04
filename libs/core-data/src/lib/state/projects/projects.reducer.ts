@@ -1,8 +1,8 @@
 import { Project } from '../../projects/project.model';
-import { ProjectsActionTypes } from './projects.actions';
 
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
-
+import { createReducer, on, Action, State } from '@ngrx/store';
+import * as ProjectActions from './projects.actions';
 export const initialProjects: Project[] = [
     {
         id: '1',
@@ -42,29 +42,46 @@ export const initialState: ProjectsState = adapter.getInitialState({
     selectedProjectId: null,
 });
 // 04 Build the MOST simplest reducer
-export function projectReducers(
-    state = initialState, action
-) {
-    switch (action.type) {
-        case ProjectsActionTypes.LoadProjects:
-            return adapter.addMany(action.payload, state);
-        case ProjectsActionTypes.SelectProject:
-            return Object.assign({}, state, { selectedProjectId: action.payload })
-        case ProjectsActionTypes.AddProject:
-            // delegate to a stand alone function
-            // BECAUSE ITS IS TESTABLE
-            return adapter.addOne(action.payload, state);
-        case ProjectsActionTypes.UpdateProject:
-            return adapter.updateOne(action.payload, state);
-        case ProjectsActionTypes.DeleteProject:
-            return adapter.removeOne(action.payload, state);
-        default:
-            return state;
-    }
+// export function projectReducers(
+//     state = initialState, action
+// ) {
+//     switch (action.type) {
+//         case ProjectsActionTypes.ProjectsLoaded:
+//             return adapter.addMany(action.payload, state);
+//         case ProjectsActionTypes.SelectProject:
+//             return Object.assign({}, state, { selectedProjectId: action.payload })
+//         case ProjectsActionTypes.ProjectAdded:
+//             return adapter.addOne(action.payload, state);
+//         case ProjectsActionTypes.ProjectUpdated:
+//             return adapter.updateOne(action.payload, state);
+//         case ProjectsActionTypes.ProjectDeleted:
+//             return adapter.removeOne(action.payload, state);
+//         default:
+//             return state;
+//     }
+// }
+const projectReducer = createReducer(
+    initialState,
+    on(ProjectActions.ProjectsLoaded, (state, { projects }) => {
+        return adapter.addAll(projects, state);
+    }),
+    on(ProjectActions.ProjectAdded, (state, { project }) => {
+        return adapter.addOne(project, state);
+    }),
+    on(ProjectActions.ProjectUpdated, (state, { project }) => {
+        return adapter.updateOne(project, state);
+    }),
+    on(ProjectActions.ProjectDeleted, (state, { id }) => {
+        return adapter.removeOne(id, state);
+    })
+)
+export function projectReducers(state: ProjectsState | undefined, action: Action) {
+    return projectReducer(state, action)
 }
+// Selectors
+export const getSelectedProject = (state: ProjectsState) => state.selectedProjectId;
 
-const createProject = (projects, project) => [...projects, project];
-const updateProject = (projects, project) => projects.map(p => {
-    return p.id === project.id ? Object.assign({}, project) : p;
-});
-const deleteProject = (projects, project) => projects.filter(p => projects.id !== p.id);
+const { selectIds, selectEntities, selectAll } = adapter.getSelectors();
+export const selectProjectIds = selectIds;
+export const selectProjectEntities = selectEntities;
+export const selectAllProjects = selectAll;
