@@ -7,15 +7,14 @@ import { Project } from '@app/core-data';
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent {
-  currentProject: Project;
   originalTitle: string;
+  selectedProject: Project;
+    
   @Output() saved = new EventEmitter();
   @Output() cancelled = new EventEmitter();
 
   @Input() set project(value: Project) {
-    if (value) {
-      this.originalTitle = value.title;
-    }
-    this.currentProject = Object.assign({}, value);
+    if (value) { this.originalTitle = value.title; }
+    this.selectedProject = Object.assign({}, value);
   };
 }

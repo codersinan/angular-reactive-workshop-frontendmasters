@@ -2,20 +2,20 @@
   <mat-card-header>
     <mat-card-title>
       <h1>
-        <span *ngIf="currentProject.id; else elseBlock">
+        <span *ngIf="selectedProject.id; else elseBlock">
           {{ originalTitle }}
         </span>
         <ng-template #elseBlock>Select a Project</ng-template>
       </h1>
     </mat-card-title>
   </mat-card-header>
-  <form (submit)="saved.emit(currentProject)">
+  <form (submit)="saved.emit(selectedProject)">
     <mat-card-content>
       <mat-form-field>
         <input
           matInput
           placeholder="Title"
-          [(ngModel)]="currentProject.title"
+          [(ngModel)]="selectedProject.title"
           type="text"
           name="title"
         />
@@ -24,23 +24,23 @@
         <textarea
           matInput
           placeholder="Details"
-          [(ngModel)]="currentProject.details"
+          [(ngModel)]="selectedProject.details"
           type="text"
           name="details"
         ></textarea>
       </mat-form-field>
       <section>
-        <h4>{{ currentProject.percentComplete }}</h4>
+        <h4>{{ selectedProject.percentComplete }}</h4>
         <mat-slider
           class="full-width"
           min="0"
           max="100"
           thumbLabel
-          [(ngModel)]="currentProject.percentComplete"
+          [(ngModel)]="selectedProject.percentComplete"
           name="percentComplete"
         ></mat-slider>
         <section>
-          <mat-checkbox [(ngModel)]="currentProject.approved" name="approved"
+          <mat-checkbox [(ngModel)]="selectedProject.approved" name="approved"
             >Approved by Customer
           </mat-checkbox>
         </section>
@@ -48,7 +48,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button type="submit" mat-button color="primary">Save</button>
-      <button type="button" mat-button (click)="cancelled.emit(currentProject)">
+      <button type="button" mat-button (click)="cancelled.emit(selectedProject)">
         Cancel
       </button>
     </mat-card-actions>

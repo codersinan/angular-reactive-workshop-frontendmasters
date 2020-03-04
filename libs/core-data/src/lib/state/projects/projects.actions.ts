@@ -28,7 +28,7 @@ export const ProjectsLoaded = createAction(
 
 export const SelectProject = createAction(
     ProjectsActionTypes.SelectProject,
-    props<{ project: Project }>()
+    props<{ id: string }>()
 );
 
 export const AddProject = createAction(
@@ -46,7 +46,7 @@ export const UpdateProject = createAction(
 );
 export const ProjectUpdated = createAction(
     ProjectsActionTypes.ProjectUpdated,
-    props<{ project: Update<Project> }>()
+    props<{ project: Project }>()
 );
 
 export const DeleteProject = createAction(
@@ -57,58 +57,3 @@ export const ProjectDeleted = createAction(
     ProjectsActionTypes.ProjectDeleted,
     props<{ id: string }>()
 );
-// export class LoadProjects implements Action {
-//     readonly type = ProjectsActionTypes.LoadProjects;
-// }
-// export class ProjectsLoaded implements Action {
-//     readonly type = ProjectsActionTypes.ProjectsLoaded;
-//     constructor(private payload: Project[]) { };
-// }
-
-// export class SelectProject implements Action {
-//     readonly type = ProjectsActionTypes.SelectProject;
-//     constructor(private payload: Project) { };
-// }
-
-// export class AddProject implements Action {
-//     readonly type = ProjectsActionTypes.AddProject;
-//     constructor(public payload: Project) { };
-// }
-// export class ProjectAdded implements Action {
-//     readonly type = ProjectsActionTypes.ProjectAdded;
-//     constructor(private payload: Project) { };
-// }
-
-// export class UpdateProject implements Action {
-//     readonly type = ProjectsActionTypes.UpdateProject;
-//     constructor(public payload: Project) { };
-// }
-// export class ProjectUpdated implements Action {
-//     readonly type = ProjectsActionTypes.ProjectUpdated;
-//     constructor(private payload: Project) { };
-// }
-
-// export class DeleteProject implements Action {
-//     readonly type = ProjectsActionTypes.DeleteProject;
-//     constructor(public payload: Project) { };
-// }
-// export class ProjectDeleted implements Action {
-//     readonly type = ProjectsActionTypes.ProjectDeleted;
-//     constructor(private payload: Project) { };
-// }
-
-// export type ProjectsActions = LoadProjects
-//     | ProjectAdded
-
-//     | SelectProject
-
-//     | AddProject
-//     | ProjectAdded
-
-//     | UpdateProject
-//     | ProjectUpdated
-
-//     | DeleteProject
-//     | ProjectDeleted
-//     ;
-

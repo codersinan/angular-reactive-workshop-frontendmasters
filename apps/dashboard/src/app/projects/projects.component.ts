@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ProjectsService, Project,
+  Project,
   NotificationService,
-  ProjectsState,
-  LoadProjects, AddProject, UpdateProject, DeleteProject,
-  initialProjects, selectAllProjects,
+  ProjectsFacade,
 } from "@app/core-data";
 
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { Store, select } from "@ngrx/store";
 
 @Component({
   selector: 'app-projects',
@@ -18,44 +14,35 @@ import { Store, select } from "@ngrx/store";
 })
 export class ProjectsComponent implements OnInit {
   projects$: Observable<Project[]>;
-  selectedProject: Project;
+  selectedProject$: Observable<Project>;
+
   constructor(
     private ns: NotificationService,
-    private projectsService: ProjectsService,
-
-    private store: Store<ProjectsState>,
+    private facede: ProjectsFacade,
   ) {
-    this.projects$ = store.pipe(
-      select(selectAllProjects)
-    )
+    this.projects$ = facede.projects$;
+    this.selectedProject$ = facede.selectedProject$;
   }
 
   ngOnInit() {
     this.getProjects();
-    this.resetProject();
+    // this.resetProject();
   }
-
-  selectProject(item) {
-    this.selectedProject = item;
-  }
-
   resetProject() {
-    const emptyProject: Project = {
-      id: null,
-      title: null,
-      details: null,
-      percentComplete: 0,
-      approved: false
-    };
-    this.selectProject(emptyProject);
+    this.facede.selectProject(null);
   }
+
+  selectProject(project) {
+    this.facede.selectProject(project.id);
+  }
+
 
   cancel() {
     this.resetProject();
   }
 
   getProjects() {
-    this.store.dispatch(LoadProjects());
+    this.facede.getProjects();
   }
 
 
@@ -68,7 +55,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.store.dispatch(AddProject({ project }));
+    this.facede.createProject(project);
 
     // this will go away
     this.ns.emit('Project Created');
@@ -76,7 +63,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.store.dispatch(UpdateProject({ project }));
+    this.facede.updateProject(project);
 
     // this will go away
     this.ns.emit('Project Updated');
@@ -84,7 +71,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
-    this.store.dispatch(DeleteProject({ id: project.id }));
+    this.facede.deleteProject(project);
 
     // this will go away
     this.ns.emit('Project Deleted');

@@ -9,13 +9,16 @@ import { ProjectsLoaded, ProjectAdded, ProjectUpdated, ProjectDeleted } from './
 import { DataPersistence } from "@nrwl/angular";
 
 import * as ProjectActions from './projects.actions';
+
 @Injectable({ providedIn: 'root' })
 export class ProjectsEffects {
     @Effect() loadProjects$ =
         this.dataPersistance.fetch(ProjectActions.LoadProjects, {
-            run: (action: ReturnType<typeof ProjectActions.LoadProjects>) => {
+            run: () => {
                 return this.projectsService.all().pipe(
-                    map((projects: Project[]) => ProjectsLoaded({ projects }))
+                    map((projects: Project[]) =>
+                        ProjectsLoaded({ projects })
+                    )
                 );
             },
             onError: () => {
@@ -38,7 +41,7 @@ export class ProjectsEffects {
             run: (action: ReturnType<typeof ProjectActions.UpdateProject>) => {
                 return this.projectsService.update(action.project).pipe(
                     map((project: Project) =>
-                        ProjectUpdated({ project: { id: project.id, changes: project } })
+                        ProjectUpdated({ project })
                     )
                 );
             },

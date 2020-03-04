@@ -9,7 +9,10 @@ export { TokenInterceptor } from "./lib/auth/token-interceptor";
 
 export { NotificationService } from './lib/notification/notification.service';
 
+export { ProjectsFacade } from "./lib/state/projects/projects.facede";
+
 // Expose project state
-export { ProjectsState, initialProjects } from './lib/state/projects/projects.reducer';
+export { selectAllProjects, selectCurrentProject } from './lib/state'
+export { ProjectsState } from './lib/state/projects/projects.reducer';
 export { LoadProjects, SelectProject, AddProject, UpdateProject, DeleteProject } from './lib/state/projects/projects.actions'
-export { selectAllProjects } from './lib/state'
+
