@@ -13,6 +13,8 @@ import { MaterialModule } from "@app/material";
 
 import { UiLoginModule } from "@app/ui-login";
 import { UiToolbarModule } from "@app/ui-toolbar";
+import { CoreDataModule } from '@app/core-data';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,11 +23,16 @@ import { UiToolbarModule } from "@app/ui-toolbar";
     HttpClientModule,
     FormsModule,
 
+    CoreDataModule,
+
     MaterialModule,
 
     UiLoginModule,
     UiToolbarModule,
-    AppRoutingModule
+
+    
+
+    AppRoutingModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,5 +11,5 @@ export class ProjectsListComponent {
   @Input() readonly = false;
 
   @Output() selected = new EventEmitter();
-  @Output() delete = new EventEmitter();  
+  @Output() delete = new EventEmitter();
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectsService, Project, NotificationService } from "@app/core-data";
+import { ProjectsService, Project, NotificationService, ProjectsState } from "@app/core-data";
 
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Store, select } from "@ngrx/store";
+
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -13,7 +16,16 @@ export class ProjectsComponent implements OnInit {
   constructor(
     private ns: NotificationService,
     private projectsService: ProjectsService,
-  ) { }
+
+    private store: Store<ProjectsState>,
+  ) {
+    this.projects$ = store.pipe(
+      select('projects'),
+      map((state: any) => {
+        return state.projects;
+      })
+    )
+  }
 
   ngOnInit() {
     this.getProjects();
@@ -40,15 +52,10 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.projects$ = this.projectsService.all()
+    // this.projects$ = this.projectsService.all()
   }
 
-  deleteProject(project) {
-    this.projectsService.delete(project.id).subscribe(result => {
-      this.ns.emit('Project Deleted');
-      this.getProjects();
-    });
-  }
+
   saveProject(project) {
     if (!project.id) {
       this.createProject(project);
@@ -58,18 +65,26 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.projectsService.create(project).subscribe(result => {
-      this.ns.emit('Project Created');
-      this.getProjects();
-      this.resetProject();
-    })
+    this.store.dispatch({ type: 'create', payload: project });
+
+    // this will go away
+    this.ns.emit('Project Created');
+    this.resetProject();
   }
 
   updateProject(project) {
-    this.projectsService.update(project).subscribe(result => {
-      this.ns.emit('Project Updated');
-      this.getProjects();
-      this.resetProject();
-    })
+    this.store.dispatch({ type: 'update', payload: project });
+
+    // this will go away
+    this.ns.emit('Project Updated');
+    this.resetProject();
+  }
+
+  deleteProject(project) {
+    this.store.dispatch({ type: 'delete', payload: project });
+
+    // this will go away
+    this.ns.emit('Project Deleted');
+    this.resetProject();
   }
 }

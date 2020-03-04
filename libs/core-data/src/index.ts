@@ -8,3 +8,6 @@ export { AuthGuard } from './lib/auth/auth.guard';
 export { TokenInterceptor } from "./lib/auth/token-interceptor";
 
 export { NotificationService } from './lib/notification/notification.service';
+
+// Expose project state
+export { ProjectsState } from './lib/state/projects/projects.reducer';

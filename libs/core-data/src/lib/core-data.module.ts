@@ -7,10 +7,13 @@ import { ProjectsService } from './projects/projects.service';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 import { NotificationService } from './notification/notification.service';
+
+import { StateModule } from './state/state.module';
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    StateModule,
   ],
   providers: [
     ProjectsService,

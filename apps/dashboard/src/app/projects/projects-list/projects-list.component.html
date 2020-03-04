@@ -17,7 +17,7 @@
         <button
           *ngIf="!readonly"
           mat-icon-button
-          (click)="delete.emit(project); $event.stopImmediatePropagation();"
+          (click)="delete.emit(project); $event.stopImmediatePropagation()"
         >
           <mat-icon>close</mat-icon>
         </button>
