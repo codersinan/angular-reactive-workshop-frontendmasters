@@ -7,6 +7,7 @@ import { reducers } from '.';
 import { NxModule } from '@nrwl/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsEffects } from './projects/projects.effects';
+import { CustomersEffects } from './customers/customers.effects';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { ProjectsEffects } from './projects/projects.effects';
         environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 10 }),
         EffectsModule.forRoot([
             ProjectsEffects,
+            CustomersEffects,
         ]),
     ],
     declarations: []

@@ -29,6 +29,18 @@
           name="details"
         ></textarea>
       </mat-form-field>
+      <mat-form-field>
+        <mat-select
+          placeholder="Customer"
+          [(ngModel)]="selectedProject.customerId"
+          name="customerId"
+        >
+          <mat-option *ngFor="let customer of customers" [value]="customer.id">
+            {{ customer.firstName }} {{ customer.lastName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <section>
         <h4>{{ selectedProject.percentComplete }}</h4>
         <mat-slider
@@ -48,7 +60,11 @@
     </mat-card-content>
     <mat-card-actions>
       <button type="submit" mat-button color="primary">Save</button>
-      <button type="button" mat-button (click)="cancelled.emit(selectedProject)">
+      <button
+        type="button"
+        mat-button
+        (click)="cancelled.emit(selectedProject)"
+      >
         Cancel
       </button>
     </mat-card-actions>

@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
 import { Project } from '../../projects/project.model';
 
 enum ProjectsActionTypes {

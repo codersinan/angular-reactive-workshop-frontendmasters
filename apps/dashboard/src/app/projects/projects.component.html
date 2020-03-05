@@ -11,6 +11,7 @@
   <div class="col-50">
     <app-project-details
       [project]="selectedProject$ | async"
+      [customers]="customers$ | async"
       (saved)="saveProject($event)"
       (cancelled)="cancel($event)"
     ></app-project-details>

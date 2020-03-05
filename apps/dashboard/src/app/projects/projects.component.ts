@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
   Project,
+  Customer,
   NotificationService,
   ProjectsFacade,
+  CustomersFacede,
 } from "@app/core-data";
 
 import { Observable } from "rxjs";
@@ -14,26 +16,30 @@ import { Observable } from "rxjs";
 })
 export class ProjectsComponent implements OnInit {
   projects$: Observable<Project[]>;
+  customers$: Observable<Customer[]>;
   selectedProject$: Observable<Project>;
 
   constructor(
     private ns: NotificationService,
-    private facede: ProjectsFacade,
+    private projectFacede: ProjectsFacade,
+    private customersFacede: CustomersFacede,
   ) {
-    this.projects$ = facede.projects$;
-    this.selectedProject$ = facede.selectedProject$;
+    this.projects$ = projectFacede.projects$;
+    this.customers$ = customersFacede.customers$;
+    this.selectedProject$ = projectFacede.selectedProject$;
   }
 
   ngOnInit() {
     this.getProjects();
-    // this.resetProject();
+    this.getCustomers();
+    this.resetProject();
   }
   resetProject() {
-    this.facede.selectProject(null);
+    this.projectFacede.selectProject(null);
   }
 
   selectProject(project) {
-    this.facede.selectProject(project.id);
+    this.projectFacede.selectProject(project.id);
   }
 
 
@@ -42,9 +48,11 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.facede.getProjects();
+    this.projectFacede.getProjects();
   }
-
+  getCustomers() {
+    this.customersFacede.loadCustomers();
+  }
 
   saveProject(project) {
     if (!project.id) {
@@ -55,7 +63,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   createProject(project) {
-    this.facede.createProject(project);
+    this.projectFacede.createProject(project);
 
     // this will go away
     this.ns.emit('Project Created');
@@ -63,7 +71,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   updateProject(project) {
-    this.facede.updateProject(project);
+    this.projectFacede.updateProject(project);
 
     // this will go away
     this.ns.emit('Project Updated');
@@ -71,7 +79,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
-    this.facede.deleteProject(project);
+    this.projectFacede.deleteProject(project);
 
     // this will go away
     this.ns.emit('Project Deleted');

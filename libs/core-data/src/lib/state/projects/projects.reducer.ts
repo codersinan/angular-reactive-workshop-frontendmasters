@@ -3,32 +3,6 @@ import { Project } from '../../projects/project.model';
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { createReducer, on, Action } from '@ngrx/store';
 import * as ProjectActions from './projects.actions';
-export const initialProjects: Project[] = [
-    {
-        id: '1',
-        title: 'Project One',
-        details: 'This is a sample project',
-        percentComplete: 20,
-        approved: false,
-        // customerId: null
-    },
-    {
-        id: '2',
-        title: 'Project Two',
-        details: 'This is a sample project',
-        percentComplete: 40,
-        approved: false,
-        // customerId: null
-    },
-    {
-        id: '3',
-        title: 'Project Three',
-        details: 'This is a sample project',
-        percentComplete: 100,
-        approved: true,
-        // customerId: null
-    }
-];
 
 // 01 Define the shape of my state
 export interface ProjectsState extends EntityState<Project> {
