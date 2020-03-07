@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   getUrl() {
-    return `${environment.apiEndpoint}${this.model}`;
+    return `${environment.apiEndPoint}${this.model}`;
   }
 
   login(email, password) {

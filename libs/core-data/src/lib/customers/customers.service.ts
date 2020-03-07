@@ -11,7 +11,7 @@ export class CustomersService {
   constructor(private http: HttpClient) { }
 
   getUrl() {
-    return `${environment.apiEndpoint}${this.model}`;
+    return `${environment.apiEndPoint}${this.model}`;
   }
 
   getUrlForId(id) {

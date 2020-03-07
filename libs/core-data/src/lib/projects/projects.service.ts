@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Project } from './project.model';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from "@env/environment";
+
 import { Observable } from "rxjs";
-const BASE_URL = "http://localhost:3000/";
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,7 @@ export class ProjectsService {
   constructor(private httpClient: HttpClient) { }
 
   getUrl() {
-    return `${BASE_URL}${this.model}`;
+    return `${environment.apiEndPoint}${this.model}`;
   }
   getUrlForId(id) {
     return `${this.getUrl()}/${id}`;
