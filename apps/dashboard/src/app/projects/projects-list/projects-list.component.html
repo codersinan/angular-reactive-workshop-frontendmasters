@@ -9,6 +9,7 @@
       <mat-list-item
         *ngFor="let project of projects"
         (click)="selected.emit(project)"
+        [routerLink]="['/projects',project.id]"        
       >
         <h3 mat-line>{{ project.title }}</h3>
         <p mat-line>

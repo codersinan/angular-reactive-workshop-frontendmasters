@@ -12,7 +12,7 @@ export const initialState: CustomerState = adapter.getInitialState({
 
 });
 
-const customerReducer = createReducer(
+const customerReducer = createReducer<CustomerState>(
     initialState,
     on(CustomerActions.CustomersLoaded, (state, { customers }) => {
         return adapter.addAll(customers, state);

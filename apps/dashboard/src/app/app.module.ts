@@ -14,9 +14,10 @@ import { MaterialModule } from "@app/material";
 import { UiLoginModule } from "@app/ui-login";
 import { UiToolbarModule } from "@app/ui-toolbar";
 import { CoreDataModule } from '@app/core-data';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,7 +31,7 @@ import { CoreDataModule } from '@app/core-data';
     UiLoginModule,
     UiToolbarModule,
 
-    AppRoutingModule,    
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

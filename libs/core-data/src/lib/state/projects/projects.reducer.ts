@@ -16,7 +16,7 @@ export const initialState: ProjectsState = adapter.getInitialState({
     selectedProjectId: null,
 });
 // 04 Build the MOST simplest reducer
-const projectReducer = createReducer(
+const projectReducer = createReducer<ProjectsState>(
     initialState,
     on(ProjectActions.ProjectsLoaded, (state, { projects }) => {
         return adapter.addAll(projects, state);

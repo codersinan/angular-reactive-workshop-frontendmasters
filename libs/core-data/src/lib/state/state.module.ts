@@ -8,6 +8,7 @@ import { NxModule } from '@nrwl/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { ProjectsEffects } from './projects/projects.effects';
 import { CustomersEffects } from './customers/customers.effects';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 
 @NgModule({
     imports: [
@@ -19,6 +20,9 @@ import { CustomersEffects } from './customers/customers.effects';
                 strictActionImmutability: true,
                 strictStateSerializability: true,
                 strictActionSerializability: true,
+                // runtimeChecks
+                // strictStateSerializability: true,
+                // strictActionSerializability: true,
             },
         }),
         environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 10 }),
@@ -26,6 +30,11 @@ import { CustomersEffects } from './customers/customers.effects';
             ProjectsEffects,
             CustomersEffects,
         ]),
+        StoreRouterConnectingModule.forRoot({
+            routerState: RouterState.Minimal,
+            // routerState:RouterState.Full, // default one not compatible with #runtimeChecks
+            stateKey: 'router'
+        })
     ],
     declarations: []
 })
